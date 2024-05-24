@@ -14,7 +14,7 @@ Abstract
 
 **1.2	Data Preparation**
 
-**Overview of the columns **
+**Overview of the columns**
 
    We access each column to get an overview of the dataset. For example, the column type and sum of the information. For the numerical columns, we can get an intuitive understanding of some data by visualization, like ‘budget’, ‘runtime’, ‘vote_average’ and ‘vote_count’. For the textual columns in a ‘key: value’ dictionary format, we clean the data by removing the key, and only keep useful value information that makes the data in a concise pattern. For example, column ‘genres’ displays only the type of movie, ‘keywords’ shows only words, only names occur in column ‘production_companies’ and ‘production_countries’.
 
@@ -32,6 +32,7 @@ Abstract
    This vector is easy to implement, but it also has its weaknesses. It is based on the absolute frequencies of occurrence of words. If a word is more frequent in many documents in the corpus, it might overweight other words that are not very frequent but can be important to specify certain categories in the documents. [11] 
    To work around the problem a TF-IDF vector can be created. This vector considers the term frequency with the inverse document frequency. In this method, a word is scaled according to its importance. To do this, the term frequency is multiplied by the inverse term frequency. The higher the score of a word, the more relevant the word is in that document. The TfidfVectorizer from sklearn is used for this purpose. This function converts the preprocessed sentences into a TF-IDF vector.  
 
+
 **2.	Topic modeling**
 
    Topic modeling is designed to extract various topics from a large dataset containing different types of documents to generate a global overview. It involves a statistical model used to discover abstract topics in a series of documents in machine learning and natural language processing, hence it is an unsupervised technique. Intuitively, if there is a central idea in an article, certain words will occur frequently. A topic model can represent the document features in a mathematical framework, it automatically analyzes each document or sentence, and determines cluster words for a set of documents. Now we attempt to utilize different topic modeling algorithms to analysis the given dataset and display visualization. [8] [11]
@@ -40,11 +41,17 @@ Abstract
 **2.1	Latent Dirichlet Allocation (LDiA)**
 
    LDiA is based on the use of words in a document and on the definition of words for each topic. To find topics for each document and words for each topic, LDiA uses the Dirichlet distribution. An important rule is that LDiA assumes that documents with similar topics use similar words, which results in finding topics by searching for groups of words that frequently occur together in different documents. To use LDiA, a total set of topics must be manually specified. LDiA then iterates through each document in the corpus and randomly assigns each word in a document to a topic, which provides the topic representation of all documents with the word distribution of all documents and the word distribution of all topics. In addition, it iterates over each word in a document to improve the model. A simplified formula is to calculate the proportion of words in a document that are currently assigned to a topic. [2] 
+   
 P(Topic T ┤|Document D)
+
 The proportion of assignments to topic T out of all documents originating from this word W.
+
 P(Word W | Topic T)
+
 Word w is going to be reassigned to a new topic, where topic is chosen with the probability:
+
 P(Topic T | Document D)*P(Word W | Topic T)
+
 This step is repeated several times until a steady state is reached. [2] The model can determine which words are most important for each topic and which topic is most fits to a document. From this state, the primary goal is to understand the results of the model and interpret the different topics.
    In this paper, four different LDiA models were created. This is to see the difference between using TF and TF-IDF in a LDiA model and to see different types of TF and TF-IDF representation by limiting the maximum features in the documents to the value of 1000. With this limitation the TF and TF-IDF vectors will be smaller only considering the 1000 most valuable words. In addition, each vector is bounded by the limiter max_df=0.9, which ignores any word that has a document frequency higher than 0.9.  This is done because words that occur very often and frequently could be unimportant words like stop words or similar words. The vectors are also limited with a cut off min_df=2. This ignores words that occur in less than two documents since they might not be as relevant as others. 
    LDiA uses the theories described above to assign words to topics and topics to individual documents. After fitting the model to the vectors, it is possible to store a matrix of the LDiA model as a variable. This matrix has the size (number of documents x topics). The matrix shows the probabilities of which topic best matches each document. The plot_top_words() function gives a good overview of each topic by plotting the most important words. In many literatures, the LDiA model is preferably done with the TF vectors but also with TF-IDF vectors. When we compare the LDiA models with TF and TF-IDF, the words of each topic are different. The LDiA model adapted to the TF vector without word limit uses same words in several topics. Words like new, family, young, life, love, world, family, or man are heavily weighted in many subjects. This is probably because such words often occur together in many documents, even if they describe different topics. It is also not easy to see what overall term each topic is supposed to have. The words in each topic seem to be random. Comparing the LDiA model adapted to the TF vector with word limit, some of the same words have high values in some topics, but not as many as in the LDiA without word limit. Also, it is easier to see which generic term could match the high-scoring words in each topic. Topic 1 (real, fbi, man, face, stop, evil, help, killer, agent & world) can be assumed to be an action movie with. Topic 9 (begin, daughter mother, son, father, story, young, love, family, life) probably includes movies from the romance or family genres as well as comedy. 
@@ -71,9 +78,9 @@ The BERTopic algorithm has three steps: [3]
 • Create a topic representation. The final step is to extract and reduce topics with class-based TF-IDF and then improve the coherence of words with Maximal Marginal Relevance. 
    After training the model it is possible to visualize plots. Function topic_model.visualize_documents() is applied to retrieve a detailed visualization for the documents inside the topics. Figure 4 is the final visualization of the movie description, which clearly displays the clustering of 53 topics in a distribution map. The topics that are similar to each other has an overlapping area or the distance between the topics are shorter. If there is a larger distance gap between the topics, which means the topics are distinct. The function recalculates the document embeddings and reduces them to 2-dimensional space for easier visualization purposes. In the plot the keyword for each topic is written beside the topic number and it is assigned appropriately when cross-examined with the intertopic distance map. It was demonstrated by disabling the option to hover over each of the points and see the content of the documents. If all the documents in the visualization are saved, the process could be complicated and results in large files. This option could be changed by setting the ‘hide_document_hover = False’ and enable the contents when hovering over the individual points. [6]
 
- 	![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/551770ae-fb00-4c04-a2d7-7f11caf61f1d)
+ ![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/551770ae-fb00-4c04-a2d7-7f11caf61f1d)
 
-	Figure 4
+  Figure 4
 
 
 **2.3	Linear Discriminant Analysis (LDA) and Principal Component Analysis (PCA) **
@@ -81,9 +88,9 @@ The BERTopic algorithm has three steps: [3]
    The given dataset is a high-dimensional dataset with different features in both numerical and text format. By using LDA model in sklearn.discriminant_analysis.LinearDiscriminant- Analysis, it breaks down our dataset into only one topic to achieve the effect of dimensionality reduction. LDA is a supervised method that requires labeled data. Hence, we manually label every movie description with Liked=1 and dislike=0 by computing the mean value of ‘vote_average’ in the dataset. Movie descriptions are voted over the vote_average mean value will be labeled as ‘Liked’ (1), in contrast will be labeled as ‘dislike’ (0). In our case, the LDA model is used to predict the movie voting and can be compared with the initial voting and trains the accuracy of LDA score. [10] 
    PCA is a method of statistical analysis and simplification of datasets, which can be utilized to identify patterns in data and express the data in such a way as to highlight their similarities. In this task, we use PCA for dimension reduction by transforming the TF-IDF of column ‘Description’ to fit in PCA model and visualize the distribution of 4803 movies’ vote score in the dataset.[13]
    
-   ![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/fc64eeb2-cbcc-44bc-ba27-8091ca70c703)
+![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/fc64eeb2-cbcc-44bc-ba27-8091ca70c703)
 					
-    Figure 5 Visualization Error without label data
+Figure 5 Visualization Error without label data
  
    Figure 5 displays a visualization error due to unlabeled data, this is because we did not reduce the dimension of column ‘vote_average’ and label the data. Hence, we cannot view the distribution clearly. Figure 6 demonstrates the final PCA visualization result. The visualization indicates various movie topics with high voting score falls on the red scatter, while those with low voting score falls on the green scatter. From the perspective of distribution, the closer the scatter distance, the more similar topic of the movies. Thereby, PCA enables us to see the similarity between samples very intuitively. However, we discover the audience vote score can exist a big gap even for movies with similar themes. If we look at the position of the center coordinates about (0,0), both red and green scatters are orthogonal. In addition to those movies with high similarity, other scatters fall on outlier movies also exist different voting scores, even if they have low similarity.
 

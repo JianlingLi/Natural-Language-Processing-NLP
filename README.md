@@ -158,34 +158,32 @@ Figure 8 Movie recommendation for Spider-Man
 
  
 **Bibliography**
-[1] Albanese, N.C. (2022). Topic Modeling with LSA, pLSA, 
-LDA, NMF, BERTopic, Top2Vec: a Comparison. [online] Medium. Available at: https://towardsdatascience.com/topic-modeling-with-lsa-plsa-lda-nmf-bertopic-top2vec-a-comparison-5e6ce4b1e4a5#1825.
-[2] Bansal, H. (2020). Latent Dirichlet Allocation. [online]
-Medium. Available at: https://medium.com/analytics-vidhya/latent-dirichelt-allocation-1ec8729589d4.
-[3] David, D. (n.d.). NLP Tutorial: Topic Modeling in Python
-with BerTopic. [online] HackerNoon. Available at: https://hackernoon.com/nlp-tutorial-topic-modeling-in-python-with-bertopic-372w35l9.
-[4] Dr. Egger, Roman & Yu, Joanne. (2022). A Topic
-Modeling Comparison Between LDA, NMF, Top2Vec, and BERTopic to Demystify Twitter Posts. Frontiers in Sociology. 7. 10.3389/fsoc.2022.886498.
-[5] GitHub. (n.d.). Why BERTopic instead of LDA, NMF...
-[online] Available at: https://github.com/MaartenGr/BERTopic/issues/486. 
-[6] Grootendorst, M. (n.d.). Topic Visualization – 
-BERTopic. [online] maartengr.github.io. Available at:https://maartengr.github.io/BERTopic/getting_started/visualization/visualization.html#visualize-documents.
-[7] Han, J. and Pei, J. (2012). Cosine Similarity – an
-overview | ScienceDirect Topics. [online] 
-ScienceDirect. Available at: https://www.sciencedirect.com/topics/computer-science/cosine-similarity.
-[8] Kulshrestha, R. (2019). A Beginner’s Guide to Latent
-Dirichlet Allocation(LDA). [online] Medium. Available at: https://towardsdatascience.com/latent-dirichlet-allocation-lda-9d1cd064ffa2.
-[9] Nettleton, D. (2014). Pearson Correlation. [online] 
-Science Direct. Available at: https://www.sciencedirect.com/topics/computer-science/pearson-correlation. 
-[10] Ren, H. (2022), PGR210 – Natural Language Processing 
-Part, Lecture12, lec12.pdf, 2.1 Distance
-[11] Sarkar, D. (2016). Text Analytics with Python: A Practical
-Real-World Approach to Gaining Actionable Insights from your Data. Page. 181,234, 241-242, 281, 283
 
-[12] spaCy. (n.d.). BERTopic. [online] Available at:
-https://spacy.io/universe/project/bertopic.
-[13] Smith, L. I. (2002). A tutorial on Principal Components
-Analysis. Chapter 3, Page12
-[14] Sánchez-Franco, M. J., and Rey-Moreno, M. (2021). Do
-travelers’ reviews depend on the destination? An analysis in coastal and urban peer-to-peer lodgings. Psychol. Market. 39, 441–459. doi: 10.1002/mar.21608
+[1] Albanese, N.C. (2022). Topic Modeling with LSA, pLSA, LDA, NMF, BERTopic, Top2Vec: a Comparison. [online] Medium. Available at: https://towardsdatascience.com/topic-modeling-with-lsa-plsa-lda-nmf-bertopic-top2vec-a-comparison-5e6ce4b1e4a5#1825.
+
+[2] Bansal, H. (2020). Latent Dirichlet Allocation. [online] Medium. Available at: https://medium.com/analytics-vidhya/latent-dirichelt-allocation-1ec8729589d4.
+
+[3] David, D. (n.d.). NLP Tutorial: Topic Modeling in Python with BerTopic. [online] HackerNoon. Available at: https://hackernoon.com/nlp-tutorial-topic-modeling-in-python-with-bertopic-372w35l9.
+
+[4] Dr. Egger, Roman & Yu, Joanne. (2022). A Topic Modeling Comparison Between LDA, NMF, Top2Vec, and BERTopic to Demystify Twitter Posts. Frontiers in Sociology. 7. 10.3389/fsoc.2022.886498.
+
+[5] GitHub. (n.d.). Why BERTopic instead of LDA, NMF... [online] Available at: https://github.com/MaartenGr/BERTopic/issues/486. 
+
+[6] Grootendorst, M. (n.d.). Topic Visualization –  BERTopic. [online] maartengr.github.io. Available at:https://maartengr.github.io/BERTopic/getting_started/visualization/visualization.html#visualize-documents.
+
+[7] Han, J. and Pei, J. (2012). Cosine Similarity – an overview | ScienceDirect Topics. [online] ScienceDirect. Available at: https://www.sciencedirect.com/topics/computer-science/cosine-similarity.
+
+[8] Kulshrestha, R. (2019). A Beginner’s Guide to Latent Dirichlet Allocation(LDA). [online] Medium. Available at: https://towardsdatascience.com/latent-dirichlet-allocation-lda-9d1cd064ffa2.
+
+[9] Nettleton, D. (2014). Pearson Correlation. [online] Science Direct. Available at: https://www.sciencedirect.com/topics/computer-science/pearson-correlation. 
+
+[10] Ren, H. (2022), PGR210 – Natural Language Processing Part, Lecture12, lec12.pdf, 2.1 Distance
+
+[11] Sarkar, D. (2016). Text Analytics with Python: A Practical Real-World Approach to Gaining Actionable Insights from your Data. Page. 181,234, 241-242, 281, 283
+
+[12] spaCy. (n.d.). BERTopic. [online] Available at: https://spacy.io/universe/project/bertopic.
+
+[13] Smith, L. I. (2002). A tutorial on Principal Components Analysis. Chapter 3, Page12
+
+[14] Sánchez-Franco, M. J., and Rey-Moreno, M. (2021). Do travelers’ reviews depend on the destination? An analysis in coastal and urban peer-to-peer lodgings. Psychol. Market. 39, 441–459. doi: 10.1002/mar.21608
 

@@ -30,6 +30,7 @@ Text preprocessing
 
 
 **2.1	Latent Dirichlet Allocation (LDiA)**
+
    LDiA is based on the use of words in a document and on the definition of words for each topic. To find topics for each document and words for each topic, LDiA uses the Dirichlet distribution. An important rule is that LDiA assumes that documents with similar topics use similar words, which results in finding topics by searching for groups of words that frequently occur together in different documents. To use LDiA, a total set of topics must be manually specified. LDiA then iterates through each document in the corpus and randomly assigns each word in a document to a topic, which provides the topic representation of all documents with the word distribution of all documents and the word distribution of all topics. In addition, it iterates over each word in a document to improve the model. A simplified formula is to calculate the proportion of words in a document that are currently assigned to a topic. [2] 
 P(Topic T ┤|Document D)
 The proportion of assignments to topic T out of all documents originating from this word W.

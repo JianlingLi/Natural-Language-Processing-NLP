@@ -9,17 +9,25 @@ Abstract
 **1.	Introduction**
 
 **1.1	Dataset**
+
    The given dataset ‘Exam_MB210_NLP.csv’ collects information on over 4800 movies. This information includes movie titles, genres, producer, reviews, and other details. The dataset contains 4803 rows and 20 columns, including 8 numerical columns and 12 textual columns.
 
 **1.2	Data Preparation**
-Overview of the columns 
+
+**Overview of the columns **
+
    We access each column to get an overview of the dataset. For example, the column type and sum of the information. For the numerical columns, we can get an intuitive understanding of some data by visualization, like ‘budget’, ‘runtime’, ‘vote_average’ and ‘vote_count’. For the textual columns in a ‘key: value’ dictionary format, we clean the data by removing the key, and only keep useful value information that makes the data in a concise pattern. For example, column ‘genres’ displays only the type of movie, ‘keywords’ shows only words, only names occur in column ‘production_companies’ and ‘production_countries’.
-Correlation
+
+**Correlation**
+
    Find the correlation of all numerical columns by using ‘Pearson’ method to calculate all pair-wise correlations, to detect and remove the features that provide redundant information. In this dataset, both the correlation matrix and visualization show all the numerical columns are in positive correlation, no redundant numerical features. [9]
-Text preprocessing 
+
+**Text preprocessing**
+
    To get a full picture of every movie description, we join column ‘tagline’ and ‘overview’ into a new column called ‘Description’. For text in column ‘Description’, a preprocessed () function is created to convert each word to lowercase, to remove the space, and the words that are neither a number nor an alphabet. To achieve this, the function breaks the sentences into a tokens process through lemmatize by importing word_tokenize from NLTK library. In addition, a list of stop words like ‘to’, ‘by’ or ‘after’ etc. which need to be removed by importing stopwords from the NLTK library. Tokenize and lemmatize movie descriptions retain the most important information that makes efficient information memory and extraction, where is the significance of text preprocessing. 
 
 **1.3	TF and TF-IDF**
+
    TF stands for terms frequency and IDF stands for inverse document frequency. TF-IDF denotes words scores that represent their importance. With sci-kit learn functions it is possible to automatically generate a vector of term frequency. The vector then includes a form to represent each word from the documents. Each index in this vector represents one word and the value at each index shows how often a word occurs in a document. In this way, a so-called termfrequency vector is created. 
    This vector is easy to implement, but it also has its weaknesses. It is based on the absolute frequencies of occurrence of words. If a word is more frequent in many documents in the corpus, it might overweight other words that are not very frequent but can be important to specify certain categories in the documents. [11] 
    To work around the problem a TF-IDF vector can be created. This vector considers the term frequency with the inverse document frequency. In this method, a word is scaled according to its importance. To do this, the term frequency is multiplied by the inverse term frequency. The higher the score of a word, the more relevant the word is in that document. The TfidfVectorizer from sklearn is used for this purpose. This function converts the preprocessed sentences into a TF-IDF vector.  
@@ -63,40 +71,59 @@ The BERTopic algorithm has three steps: [3]
 • Create a topic representation. The final step is to extract and reduce topics with class-based TF-IDF and then improve the coherence of words with Maximal Marginal Relevance. 
    After training the model it is possible to visualize plots. Function topic_model.visualize_documents() is applied to retrieve a detailed visualization for the documents inside the topics. Figure 4 is the final visualization of the movie description, which clearly displays the clustering of 53 topics in a distribution map. The topics that are similar to each other has an overlapping area or the distance between the topics are shorter. If there is a larger distance gap between the topics, which means the topics are distinct. The function recalculates the document embeddings and reduces them to 2-dimensional space for easier visualization purposes. In the plot the keyword for each topic is written beside the topic number and it is assigned appropriately when cross-examined with the intertopic distance map. It was demonstrated by disabling the option to hover over each of the points and see the content of the documents. If all the documents in the visualization are saved, the process could be complicated and results in large files. This option could be changed by setting the ‘hide_document_hover = False’ and enable the contents when hovering over the individual points. [6]
 
- 		![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/551770ae-fb00-4c04-a2d7-7f11caf61f1d)
+ 	![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/551770ae-fb00-4c04-a2d7-7f11caf61f1d)
 
-										Figure 4
+	Figure 4
 
 
 **2.3	Linear Discriminant Analysis (LDA) and Principal Component Analysis (PCA) **
+
    The given dataset is a high-dimensional dataset with different features in both numerical and text format. By using LDA model in sklearn.discriminant_analysis.LinearDiscriminant- Analysis, it breaks down our dataset into only one topic to achieve the effect of dimensionality reduction. LDA is a supervised method that requires labeled data. Hence, we manually label every movie description with Liked=1 and dislike=0 by computing the mean value of ‘vote_average’ in the dataset. Movie descriptions are voted over the vote_average mean value will be labeled as ‘Liked’ (1), in contrast will be labeled as ‘dislike’ (0). In our case, the LDA model is used to predict the movie voting and can be compared with the initial voting and trains the accuracy of LDA score. [10] 
    PCA is a method of statistical analysis and simplification of datasets, which can be utilized to identify patterns in data and express the data in such a way as to highlight their similarities. In this task, we use PCA for dimension reduction by transforming the TF-IDF of column ‘Description’ to fit in PCA model and visualize the distribution of 4803 movies’ vote score in the dataset.[13]
    
    ![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/fc64eeb2-cbcc-44bc-ba27-8091ca70c703)
-					Figure 5 Visualization Error without label data
+					
+    Figure 5 Visualization Error without label data
  
    Figure 5 displays a visualization error due to unlabeled data, this is because we did not reduce the dimension of column ‘vote_average’ and label the data. Hence, we cannot view the distribution clearly. Figure 6 demonstrates the final PCA visualization result. The visualization indicates various movie topics with high voting score falls on the red scatter, while those with low voting score falls on the green scatter. From the perspective of distribution, the closer the scatter distance, the more similar topic of the movies. Thereby, PCA enables us to see the similarity between samples very intuitively. However, we discover the audience vote score can exist a big gap even for movies with similar themes. If we look at the position of the center coordinates about (0,0), both red and green scatters are orthogonal. In addition to those movies with high similarity, other scatters fall on outlier movies also exist different voting scores, even if they have low similarity.
- 
- 
-Figure 6 Movie voting score distribution
 
-2.4 Summary
+ ![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/1c9a1ed7-5c86-4f0e-94c7-8e5083cf0a7e)
+
+  Figure 6 Movie voting score distribution
+
+**2.4 Summary**
+
    The advantage of LDA is a supervised method that can improve the predictive performance of the extracted features most of the time. PCA is an unsupervised algorithm. Patterns in data can be difficult to find under high-dimensional dataset, where graphical representation is not available. In our task, PCA is a powerful tool by reducing the number of dimensions, without losing much information. Both LDA and PCA can be used for dimensional reduction. However, no matter LDA or PCA, the new features are not easily interpretable, we must manually set or tune the number of components to keep. In addition, LDA requires labeled data that makes it more situational, BERTopic follows dimensional reduction as well. Compared to other techniques, it works exceptionally with pretrained embeddings due to a split between clustering the documents and using c-TF-IDF to extract topic representations.[4][14] Although BERTopic has advantages over other methods, if you do not have a GPU, embedding documents can take too much time compared to LDiA. [5] Comparing both results, for LDiA the number of topics needs to be specified beforehand where BERTopic doesn’t need it. Also, BERTopic assigns each document to only one topic where LDiA returns a matrix where each document is assumed to be a mixture of topics. [1] LDiA is better to analyze because each topic can be accessed, and the most important words can be visualized. Through automatically assigning the number of topics the BERTopic model considers more topics than the LDiA. Both models work fine. It is hard to compare the results because the models use completely different approaches. 
 
-	Searching for similar movies
-3.1 Background
+
+**3.	Searching for similar movies**
+
+**3.1 Background**
+
    In this task, we will find similar movies as ‘Spider-Man’ from the give dataset. What we can do to solve the problem is to create a search engine program and obtain a recommendation movie list. Hereby, we would like to introduce a few solutions by using related algorithms. 
 
-	Cosine Similarity 
+**3.2 Cosine Similarity** 
+
    To find similar movies based on the dataset, it is necessary to consider what inputs are required and what outputs are expected. Our recommendation program should get information based on the entered title in this example ‘Spider-Man’. With the title every column of the dataset can be entered. This enables the comparison of different columns of movies in the dataset. Cosine similarity measures the similarity between two vectors and gives the cosine of the angle between the vectors of two documents in their inner product space.[7][11] Based on the cosine angle of two vectors and the resulting similarity value, which is measured from   -1 to 1, it can be determined whether documents are similar or not. If the similarity value is close to 1, it means that the vectors are close to each other and the angle between the two documents is close to zero degrees (cos0°). If the vectors have a similarity value close to 0, it means that the documents are not similar and form an orthogonal angle between them (cos90°). The last option is a similarity value close to -1, which means that the terms are completely different, and the distribution is completely opposite to each other (cos180°). Figure 7 shows each scenario for better understanding. [11] 
+
+![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/a48b504e-db70-4095-b1f5-bf74730d6c79)
+
 Figure 7 Cosine Similarity
 
    The cosine similarity is usually compared with the TF-IDF vectors. Comparing TF vectors with cosine similarity results in the similarity score from range 0 to 1. The similarity score can be calculated using the following formula, where u_i and v_i represent the features of the vectors and n is the total number of features.
-cosine similarity score=  (∑_(i=1)^n▒〖u_i v_i 〗)/(√(∑_(i=1)^n▒u_i^2 ) √(∑_(i=1)^n▒v_i^2 ))
+
+   <img width="256" alt="image" src="https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/df4e452c-5433-4d58-9c68-959b58c6af56">
+
 To obtain the cosine distance, the same formula can be used to subtract from 1. The result then shows the distance between the two documents.
-cosine distance=1-(∑_(i=1)^n▒〖u_i v_i 〗)/(√(∑_(i=1)^n▒u_i^2 ) √(∑_(i=1)^n▒v_i^2 ))
+
+   <img width="231" alt="image" src="https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/c7150d38-126e-49ec-8b07-36fa8d95e376">
+
    In this project, two possible functions were created. The functions use cosine similarity to find the best recommendations. With the input of a title the functions get the description of the movie from the dataset. Based on the description, it is possible to find the cosine similarity. The result is the cosine similarity value for each movie in the dataset. The value tells whether a movie is similar or not. The output of both functions provides different movies that can be treated as recommendations based on the similarity of the movie descriptions. This time, the TF-IDF vector without word limitation is used to find similarities. Using this vector, the result is the best.
    The result of the first and simpler recommendation function shows the most similar movies based on the description of each movie compared to the movie ‘Spider-Man’. As can be seen in figure 8, movies like ‘The Amazing Spider-Man 2’, ‘Spider-Man 3’ or ‘The amazing ‘Spider-Man’ are movies that are similar to ‘Spider-Man’, which makes sense. However, movies like ‘The Reef’ or ‘Arachnophobia’ also have a high similarity score to ‘Spider-Man’. To understand the details of this result, similar words of each description are printed in the code.
+
+![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/3fb9dd2d-9aa6-406e-997f-3778bac98e02)
+Figure 8 Movie recommendation for Spider-Man
+   
    For example, ‘The Amazing Spider-Man 2’ has eight words in common with ‘Spider-Man’ (peter, parker, high, school, come, peter, peter, peter). Compared to the second similar movie, that's a lot of words. The Reef has only two words in common with ‘Spider-Man’ (great, great). The third recommendation ‘Spider-Man 3’ also sounds more like ‘Spider-Man’ than ‘The Reef’ at first. This movie also has three words in common with ‘Spider-Man’ (altered, peter, parker). But why does this movie have a lower similarity score than ‘The Reef’ Looking at the TF-IDF vector of ‘Spider-Man’, some words seem to be more important than others based on TF-IDF weights. In this scenario, the word great needs to be analyzed, as well as the words altered, peter, and parker. Looking at the TF-IDF vector of ‘Spider-Man’ and ‘The Reef’, the word great has the highest IDF value in both vectors. Comparing the vectors of ‘Spider-Man’ and ‘Spider-Man 3’, the words in both vectors are less relevant than great and thus ‘The Reef’ has a higher similarity value than ‘Spider-Man 3’. 
    This feature is good, but it can be improved. Based on the dataset, the given features can be used in a recommendation system to find only similar movies and get only good recommendations. Based on data understanding and preprocessing, features like vote_count, vote_average and genres can be considered to get better results. The improved_recommendations() function uses these features to filter out recommendations that may not be good enough. The basis of this function is the same as the other functions and is thus based on the cosine similarity score. Additionally, movies that do not meet certain criteria are filtered out. In this case, a list of the 30 most similar movies is created. 
    For the vote_average feature, the mean value of the 30 most similar films is the first criterion. Any movie whose vote_average is below this value is filtered out. The same is done with the feature vote_count. For this feature, the criterion is that the movies should have a score higher than the quantile value of 0.60. These two features ensure that the recommended movies have the same range of number of votes and the rating is high enough of the movie. The last criterion to filter out movies and make the recommendations more accurate is to consider the genres of each movie. The recommended movies should contain at least one of the genres of the searched movie. In the example of searching for similar movies of ‘Spider-Man’, the recommended movies should belong to either the Fantasy or Action genre. As you can see in the code, the result is slightly different compared to the other function. ‘The Reef’ is no longer a recommendation because the genres of this movie are drama, thriller, and horror. ‘Spider-Man 3’ is also no longer a recommended movie. This is because the vote_count of this movie is 3576 and should be higher than 3874.8 and thus the movie cannot be validated in this example.

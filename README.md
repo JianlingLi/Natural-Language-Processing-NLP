@@ -85,8 +85,7 @@ The BERTopic algorithm has three steps: [3]
 
   Figure 4
 
-
-**2.3	Linear Discriminant Analysis (LDA) and Principal Component Analysis (PCA) **
+**2.3	Linear Discriminant Analysis (LDA) and Principal Component Analysis (PCA)**
 
    The given dataset is a high-dimensional dataset with different features in both numerical and text format. By using LDA model in sklearn.discriminant_analysis.LinearDiscriminant- Analysis, it breaks down our dataset into only one topic to achieve the effect of dimensionality reduction. LDA is a supervised method that requires labeled data. Hence, we manually label every movie description with Liked=1 and dislike=0 by computing the mean value of ‘vote_average’ in the dataset. Movie descriptions are voted over the vote_average mean value will be labeled as ‘Liked’ (1), in contrast will be labeled as ‘dislike’ (0). In our case, the LDA model is used to predict the movie voting and can be compared with the initial voting and trains the accuracy of LDA score. [10] 
    PCA is a method of statistical analysis and simplification of datasets, which can be utilized to identify patterns in data and express the data in such a way as to highlight their similarities. In this task, we use PCA for dimension reduction by transforming the TF-IDF of column ‘Description’ to fit in PCA model and visualize the distribution of 4803 movies’ vote score in the dataset.[13]
@@ -138,7 +137,13 @@ Figure 8 Movie recommendation for Spider-Man
    This feature is good, but it can be improved. Based on the dataset, the given features can be used in a recommendation system to find only similar movies and get only good recommendations. Based on data understanding and preprocessing, features like vote_count, vote_average and genres can be considered to get better results. The improved_recommendations() function uses these features to filter out recommendations that may not be good enough. The basis of this function is the same as the other functions and is thus based on the cosine similarity score. Additionally, movies that do not meet certain criteria are filtered out. In this case, a list of the 30 most similar movies is created. 
    For the vote_average feature, the mean value of the 30 most similar films is the first criterion. Any movie whose vote_average is below this value is filtered out. The same is done with the feature vote_count. For this feature, the criterion is that the movies should have a score higher than the quantile value of 0.60. These two features ensure that the recommended movies have the same range of number of votes and the rating is high enough of the movie. The last criterion to filter out movies and make the recommendations more accurate is to consider the genres of each movie. The recommended movies should contain at least one of the genres of the searched movie. In the example of searching for similar movies of ‘Spider-Man’, the recommended movies should belong to either the Fantasy or Action genre. As you can see in the code, the result is slightly different compared to the other function. ‘The Reef’ is no longer a recommendation because the genres of this movie are drama, thriller, and horror. ‘Spider-Man 3’ is also no longer a recommended movie. This is because the vote_count of this movie is 3576 and should be higher than 3874.8 and thus the movie cannot be validated in this example.
 
-	Latent Semantic Indexing (LSI)
+   ![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/c9ded5a9-f3fe-4846-abd9-fc0de88cb811)
+
+   Figure 10  Improved movie recommendation for Spider-Man
+
+
+**3.3	Latent Semantic Indexing (LSI)**
+
    The reason to utilize LSI [11] is that an effective search engine needs to handle semantics probably and can be able to match and retrieve at the semantic level. And LSI can achieve this by applying SVD on the TF-IDF matrix. Our solutions as following:
 • Utilized the TF-IDF from sklearn to construct an initial search engine.
 • Create a train function and build up an SVD model. The imported TF-IDF matrix will be decomposed by SVD. Hence, LSI can be achieved by applying SVD on the TF-IDF matrix.
@@ -147,7 +152,8 @@ Figure 8 Movie recommendation for Spider-Man
 • Output: retrieve the initial movie title from the index mapping. 
    From the output in figure 12, we can see that all the retrieved movie titles are very close to ‘Spider-Man’ on semantic level. Not only the query movie itself, but also its sequel and moreover the other related series as well. In the real world, this latent semantic based search makes the selection that is closest to the end user’s wishes, where its commercial value lies. 
 
-	**Conclusion and future perspective **
+**4. Conclusion and future perspective**
+
    In NLP part, we used different techniques to solve various tasks. For the numerical data, we attempted to use machine learning skill ‘Pearson’ method to discover all the numerical columns are in positive correlations. For the textual data, we applied NLP skill to extract the information. In topic modeling, we utilized various algorithms which cover both supervised and unsupervised learning. LDiA is used to discover the relevant and less relevant topic. BERTopic is applied on the topic clustering. In addition, we also introduced the usage of dimension reduction algorithm PCA and LDA on text analysis. We had a challenge to load the full dataset after PCA was executed. This is probably because the matrix dimension was modified and some of the feature’s data were extracted, which affects the integrity of the dataset. Moreover, we built up a mini search engine by cosine similarity and LSI to find similar movie recommendations. In the future, the search engine can be a huge potential market. The traditional search engines only provide content that exists on the internet. In the future, there might be a new generation engine that can provide answers that have never appeared before.
 
  

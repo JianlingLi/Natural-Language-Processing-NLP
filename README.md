@@ -2,14 +2,15 @@
 Abstract
    In this part, we will demonstrate the whole Natural Language Processing by various hands-on practices. From data collection, preparation, and preprocessing to the generation of TF and TF-IDF, further to the text analytics of topic modeling by different algorithms. In addition, the deployment and evaluation of the algorithms in the real-world case, as well as the possible optimized solution and future prospect.
    
-   ![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/d6f55d2b-9e97-4241-babc-0896c84a1a13)
-   Figure 1 Natural Language Processing pipeline
+   	![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/d6f55d2b-9e97-4241-babc-0896c84a1a13)
+   						Figure 1 Natural Language Processing pipeline
 
 **1.	Introduction**
-1.1	Dataset
+
+**1.1	Dataset**
    The given dataset ‘Exam_MB210_NLP.csv’ collects information on over 4800 movies. This information includes movie titles, genres, producer, reviews, and other details. The dataset contains 4803 rows and 20 columns, including 8 numerical columns and 12 textual columns.
 
-1.2	Data Preparation
+**1.2	Data Preparation**
 Overview of the columns 
    We access each column to get an overview of the dataset. For example, the column type and sum of the information. For the numerical columns, we can get an intuitive understanding of some data by visualization, like ‘budget’, ‘runtime’, ‘vote_average’ and ‘vote_count’. For the textual columns in a ‘key: value’ dictionary format, we clean the data by removing the key, and only keep useful value information that makes the data in a concise pattern. For example, column ‘genres’ displays only the type of movie, ‘keywords’ shows only words, only names occur in column ‘production_companies’ and ‘production_countries’.
 Correlation
@@ -17,15 +18,17 @@ Correlation
 Text preprocessing 
    To get a full picture of every movie description, we join column ‘tagline’ and ‘overview’ into a new column called ‘Description’. For text in column ‘Description’, a preprocessed () function is created to convert each word to lowercase, to remove the space, and the words that are neither a number nor an alphabet. To achieve this, the function breaks the sentences into a tokens process through lemmatize by importing word_tokenize from NLTK library. In addition, a list of stop words like ‘to’, ‘by’ or ‘after’ etc. which need to be removed by importing stopwords from the NLTK library. Tokenize and lemmatize movie descriptions retain the most important information that makes efficient information memory and extraction, where is the significance of text preprocessing. 
 
-1.3	TF and TF-IDF
+**1.3	TF and TF-IDF**
    TF stands for terms frequency and IDF stands for inverse document frequency. TF-IDF denotes words scores that represent their importance. With sci-kit learn functions it is possible to automatically generate a vector of term frequency. The vector then includes a form to represent each word from the documents. Each index in this vector represents one word and the value at each index shows how often a word occurs in a document. In this way, a so-called termfrequency vector is created. 
    This vector is easy to implement, but it also has its weaknesses. It is based on the absolute frequencies of occurrence of words. If a word is more frequent in many documents in the corpus, it might overweight other words that are not very frequent but can be important to specify certain categories in the documents. [11] 
    To work around the problem a TF-IDF vector can be created. This vector considers the term frequency with the inverse document frequency. In this method, a word is scaled according to its importance. To do this, the term frequency is multiplied by the inverse term frequency. The higher the score of a word, the more relevant the word is in that document. The TfidfVectorizer from sklearn is used for this purpose. This function converts the preprocessed sentences into a TF-IDF vector.  
 
-2.	Topic modeling
+**2.	Topic modeling**
+
    Topic modeling is designed to extract various topics from a large dataset containing different types of documents to generate a global overview. It involves a statistical model used to discover abstract topics in a series of documents in machine learning and natural language processing, hence it is an unsupervised technique. Intuitively, if there is a central idea in an article, certain words will occur frequently. A topic model can represent the document features in a mathematical framework, it automatically analyzes each document or sentence, and determines cluster words for a set of documents. Now we attempt to utilize different topic modeling algorithms to analysis the given dataset and display visualization. [8] [11]
 
-	Latent Dirichlet Allocation (LDiA)
+
+**2.1	Latent Dirichlet Allocation (LDiA)**
    LDiA is based on the use of words in a document and on the definition of words for each topic. To find topics for each document and words for each topic, LDiA uses the Dirichlet distribution. An important rule is that LDiA assumes that documents with similar topics use similar words, which results in finding topics by searching for groups of words that frequently occur together in different documents. To use LDiA, a total set of topics must be manually specified. LDiA then iterates through each document in the corpus and randomly assigns each word in a document to a topic, which provides the topic representation of all documents with the word distribution of all documents and the word distribution of all topics. In addition, it iterates over each word in a document to improve the model. A simplified formula is to calculate the proportion of words in a document that are currently assigned to a topic. [2] 
 P(Topic T ┤|Document D)
 The proportion of assignments to topic T out of all documents originating from this word W.
@@ -37,22 +40,37 @@ This step is repeated several times until a steady state is reached. [2] The mod
    LDiA uses the theories described above to assign words to topics and topics to individual documents. After fitting the model to the vectors, it is possible to store a matrix of the LDiA model as a variable. This matrix has the size (number of documents x topics). The matrix shows the probabilities of which topic best matches each document. The plot_top_words() function gives a good overview of each topic by plotting the most important words. In many literatures, the LDiA model is preferably done with the TF vectors but also with TF-IDF vectors. When we compare the LDiA models with TF and TF-IDF, the words of each topic are different. The LDiA model adapted to the TF vector without word limit uses same words in several topics. Words like new, family, young, life, love, world, family, or man are heavily weighted in many subjects. This is probably because such words often occur together in many documents, even if they describe different topics. It is also not easy to see what overall term each topic is supposed to have. The words in each topic seem to be random. Comparing the LDiA model adapted to the TF vector with word limit, some of the same words have high values in some topics, but not as many as in the LDiA without word limit. Also, it is easier to see which generic term could match the high-scoring words in each topic. Topic 1 (real, fbi, man, face, stop, evil, help, killer, agent & world) can be assumed to be an action movie with. Topic 9 (begin, daughter mother, son, father, story, young, love, family, life) probably includes movies from the romance or family genres as well as comedy. 
    Looking at the LDiA-TF-IDF model without a limited number of features, the words of the topics have changed, but the same problems still occur. The subjects are not as easy to interpret compared to the LDiA-TF-IDF model with word limit. Furthermore, city names appear in the TF-IDF-LDiA models. For example, in Topic 3, the words los and angeles are among the most scored words, and new and york also occur together. The LDiA models seem to work better when a word limit is given. Through the word limit, the focus is only on the most important words and their relationships to other words.
 The other visualization of each LDiA model shows each topic in a circle. The size of the circles defines how many documents belong to a topic and thus the importance of each topic.
-   Looking at the LDiA models fitted to the TF vectors, the circles have almost the same size. This means that each topic contains almost the same number of documents. Visualization of the LDiA model fitted to the TF-IDF vectors shows that some topics are more important than others due to the size difference of the circles. Also, some topics are closer together while others are far apart. Topics that are close to each other have similar words with high weight where topics that use different words are far away. Comparing the TF-LDiA models with the TF-IDF-LDiA models, the TF-IDF-LDiA models have some topics that are very similar, so they overlap and the TF-LDiA models are better distributed. If the circles overlap, this could indicate that too many topics have been selected. Additionally, the slider on the side of the visualization helps to get a better insight into each topic. The slider is used to adjust the relevance of the displayed words in the histogram. When the slider is at one, the most relevant words of the topic are displayed. As the slider moves down, the words displayed change. Moving the slider displays words that are less relevant. Displaying words that are less relevant can help in understanding the topic. 
-Figure 3 LDA Topic visualization with TF-IDF vector (limited features)
 
-	BERTopic Modeling
+	![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/d7999a0e-586c-4ed2-912b-033246396420)
+					Figure 2 LDA Topic visualization with TF vector (limited features)
+
+   Looking at the LDiA models fitted to the TF vectors, the circles have almost the same size. This means that each topic contains almost the same number of documents. Visualization of the LDiA model fitted to the TF-IDF vectors shows that some topics are more important than others due to the size difference of the circles. Also, some topics are closer together while others are far apart. Topics that are close to each other have similar words with high weight where topics that use different words are far away. Comparing the TF-LDiA models with the TF-IDF-LDiA models, the TF-IDF-LDiA models have some topics that are very similar, so they overlap and the TF-LDiA models are better distributed. If the circles overlap, this could indicate that too many topics have been selected. Additionally, the slider on the side of the visualization helps to get a better insight into each topic. The slider is used to adjust the relevance of the displayed words in the histogram. When the slider is at one, the most relevant words of the topic are displayed. As the slider moves down, the words displayed change. Moving the slider displays words that are less relevant. Displaying words that are less relevant can help in understanding the topic. 
+
+   ![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/9a16155f-f3e8-48cb-8f0e-37ada5ad4680)
+			Figure 3 LDA Topic visualization with TF-IDF vector (limited features)
+
+
+**2.2	BERTopic Modeling**
+
    BERTopic leverages embedding models and c-TF-IDF to create dense clusters allowing for easily interpretable topics whilst keeping important words in the topic descriptions. [12]  
 The BERTopic algorithm has three steps: [3]
 • Embed the documents. The algorithm extracts document embeddings with BERT or any other embedding technique.
 • Cluster documents. When reducing the dimensionality of embeddings, it uses UMAP and to cluster the reduced embeddings and creating the clusters of semantically similar documents, it uses HDBSCAN.
 • Create a topic representation. The final step is to extract and reduce topics with class-based TF-IDF and then improve the coherence of words with Maximal Marginal Relevance. 
    After training the model it is possible to visualize plots. Function topic_model.visualize_documents() is applied to retrieve a detailed visualization for the documents inside the topics. Figure 4 is the final visualization of the movie description, which clearly displays the clustering of 53 topics in a distribution map. The topics that are similar to each other has an overlapping area or the distance between the topics are shorter. If there is a larger distance gap between the topics, which means the topics are distinct. The function recalculates the document embeddings and reduces them to 2-dimensional space for easier visualization purposes. In the plot the keyword for each topic is written beside the topic number and it is assigned appropriately when cross-examined with the intertopic distance map. It was demonstrated by disabling the option to hover over each of the points and see the content of the documents. If all the documents in the visualization are saved, the process could be complicated and results in large files. This option could be changed by setting the ‘hide_document_hover = False’ and enable the contents when hovering over the individual points. [6]
- 
-Figure 4
 
-	Linear Discriminant Analysis (LDA) and Principal Component Analysis (PCA) 
+ 		![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/551770ae-fb00-4c04-a2d7-7f11caf61f1d)
+
+										Figure 4
+
+
+**2.3	Linear Discriminant Analysis (LDA) and Principal Component Analysis (PCA) **
    The given dataset is a high-dimensional dataset with different features in both numerical and text format. By using LDA model in sklearn.discriminant_analysis.LinearDiscriminant- Analysis, it breaks down our dataset into only one topic to achieve the effect of dimensionality reduction. LDA is a supervised method that requires labeled data. Hence, we manually label every movie description with Liked=1 and dislike=0 by computing the mean value of ‘vote_average’ in the dataset. Movie descriptions are voted over the vote_average mean value will be labeled as ‘Liked’ (1), in contrast will be labeled as ‘dislike’ (0). In our case, the LDA model is used to predict the movie voting and can be compared with the initial voting and trains the accuracy of LDA score. [10] 
    PCA is a method of statistical analysis and simplification of datasets, which can be utilized to identify patterns in data and express the data in such a way as to highlight their similarities. In this task, we use PCA for dimension reduction by transforming the TF-IDF of column ‘Description’ to fit in PCA model and visualize the distribution of 4803 movies’ vote score in the dataset.[13]
+   
+   ![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/fc64eeb2-cbcc-44bc-ba27-8091ca70c703)
+					Figure 5 Visualization Error without label data
+ 
    Figure 5 displays a visualization error due to unlabeled data, this is because we did not reduce the dimension of column ‘vote_average’ and label the data. Hence, we cannot view the distribution clearly. Figure 6 demonstrates the final PCA visualization result. The visualization indicates various movie topics with high voting score falls on the red scatter, while those with low voting score falls on the green scatter. From the perspective of distribution, the closer the scatter distance, the more similar topic of the movies. Thereby, PCA enables us to see the similarity between samples very intuitively. However, we discover the audience vote score can exist a big gap even for movies with similar themes. If we look at the position of the center coordinates about (0,0), both red and green scatters are orthogonal. In addition to those movies with high similarity, other scatters fall on outlier movies also exist different voting scores, even if they have low similarity.
  
  

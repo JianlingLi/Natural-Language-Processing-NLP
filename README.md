@@ -3,7 +3,8 @@ Abstract
    In this part, we will demonstrate the whole Natural Language Processing by various hands-on practices. From data collection, preparation, and preprocessing to the generation of TF and TF-IDF, further to the text analytics of topic modeling by different algorithms. In addition, the deployment and evaluation of the algorithms in the real-world case, as well as the possible optimized solution and future prospect.
    
    ![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/d6f55d2b-9e97-4241-babc-0896c84a1a13)
-   						Figure 1 Natural Language Processing pipeline
+   						
+	 Figure 1 Natural Language Processing pipeline
 
 **1.	Introduction**
 

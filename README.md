@@ -4,7 +4,7 @@ Abstract
    
    ![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/d6f55d2b-9e97-4241-babc-0896c84a1a13)
    						
-	 Figure 1 Natural Language Processing pipeline
+   Figure 1 Natural Language Processing pipeline
 
 **1.	Introduction**
 
@@ -42,13 +42,15 @@ This step is repeated several times until a steady state is reached. [2] The mod
    Looking at the LDiA-TF-IDF model without a limited number of features, the words of the topics have changed, but the same problems still occur. The subjects are not as easy to interpret compared to the LDiA-TF-IDF model with word limit. Furthermore, city names appear in the TF-IDF-LDiA models. For example, in Topic 3, the words los and angeles are among the most scored words, and new and york also occur together. The LDiA models seem to work better when a word limit is given. Through the word limit, the focus is only on the most important words and their relationships to other words.
 The other visualization of each LDiA model shows each topic in a circle. The size of the circles defines how many documents belong to a topic and thus the importance of each topic.
 
-	![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/d7999a0e-586c-4ed2-912b-033246396420)
-					Figure 2 LDA Topic visualization with TF vector (limited features)
+![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/d7999a0e-586c-4ed2-912b-033246396420)
+					
+Figure 2 LDA Topic visualization with TF vector (limited features)
 
    Looking at the LDiA models fitted to the TF vectors, the circles have almost the same size. This means that each topic contains almost the same number of documents. Visualization of the LDiA model fitted to the TF-IDF vectors shows that some topics are more important than others due to the size difference of the circles. Also, some topics are closer together while others are far apart. Topics that are close to each other have similar words with high weight where topics that use different words are far away. Comparing the TF-LDiA models with the TF-IDF-LDiA models, the TF-IDF-LDiA models have some topics that are very similar, so they overlap and the TF-LDiA models are better distributed. If the circles overlap, this could indicate that too many topics have been selected. Additionally, the slider on the side of the visualization helps to get a better insight into each topic. The slider is used to adjust the relevance of the displayed words in the histogram. When the slider is at one, the most relevant words of the topic are displayed. As the slider moves down, the words displayed change. Moving the slider displays words that are less relevant. Displaying words that are less relevant can help in understanding the topic. 
 
    ![image](https://github.com/JianlingLi/Natural-Language-Processing-NLP/assets/122969933/9a16155f-f3e8-48cb-8f0e-37ada5ad4680)
-			Figure 3 LDA Topic visualization with TF-IDF vector (limited features)
+			
+   Figure 3 LDA Topic visualization with TF-IDF vector (limited features)
 
 
 **2.2	BERTopic Modeling**
